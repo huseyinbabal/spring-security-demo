@@ -17,11 +17,7 @@ public class CustomHttpConfigurer extends AbstractHttpConfigurer<CustomHttpConfi
        builder
             .cors().and().csrf().disable()
            .authorizeRequests((auth) -> {
-               auth.antMatchers(GET, "/api/users/**").hasAnyAuthority("ROLE_USER");
-               auth.antMatchers(POST, "/api/users/**").hasAnyAuthority("ROLE_ADMIN");
-               auth.antMatchers(PATCH, "/api/users/**").hasAnyAuthority("ROLE_ADMIN");
-               auth.antMatchers(POST, "/api/roles/**").hasAnyAuthority("ROLE_ADMIN");
-               auth.anyRequest().permitAll();
+               auth.anyRequest().authenticated();
            }).sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
     }
 
